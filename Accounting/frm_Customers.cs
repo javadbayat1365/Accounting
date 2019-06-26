@@ -37,5 +37,13 @@ namespace Accounting
         {
             DataBinding();
         }
+
+        private void txtFilter_TextChanged(object sender, EventArgs e)
+        {
+            using (UnitOfWork uof = new UnitOfWork())
+            {
+                dgvcustomers.DataSource = uof.Customers.GetCustomersByFilter(txtFilter.Text.Trim());
+            }
+        }
     }
 }

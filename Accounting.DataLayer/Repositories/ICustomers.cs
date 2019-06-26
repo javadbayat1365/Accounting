@@ -8,6 +8,6 @@ namespace Accounting.DataLayer.Repositories
 {
     public interface ICustomers : IGenericRepository<Customers>
     {
-
+        IEnumerable<Customers> GetCustomersByFilter(string str);
     }
 }
