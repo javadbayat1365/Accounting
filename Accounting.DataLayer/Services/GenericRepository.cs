@@ -40,17 +40,10 @@ namespace Accounting.DataLayer.Services
         }
         public IEnumerable<T> GetAll()
         {
-            return null;
-            //try
-            //{
-            //    db.cu
-            //    return true;
-            //}
-            //catch (Exception w)
-            //{
-            //    return false;
-            //}
-            
+           var sel = table.ToList();
+            return sel;
+
+
         }
 
         public T GetOneOfAll(object EntityID)

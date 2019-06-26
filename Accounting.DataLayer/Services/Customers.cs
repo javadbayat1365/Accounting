@@ -16,33 +16,36 @@ namespace Accounting.DataLayer.Services
 
         public new bool Delete(DataLayer.Customers entity)
         {
-           return Delete(entity);
+           return base.Delete(entity);
         }
         public new bool DeleteByID(object ID)
         {
-            return DeleteByID(ID);
+            return base.DeleteByID(ID);
         }
 
-        public new IEnumerable<DataLayer.Customers> GetAll() => GetAll();
+        public new IEnumerable<DataLayer.Customers> GetAll()
+        {
+            return base.GetAll();
+        }
 
         public DataLayer.Customers GetOneOfAll(object EntityID)
         {
-           return GetOneOfAll(EntityID);
+           return base.GetOneOfAll(EntityID);
         }
 
         public bool Insert(DataLayer.Customers entity)
         {
-           return Insert(entity);
+           return base.Insert(entity);
         }
 
         public void SaveChanges()
         {
-            SaveChanges();
+            base.SaveChanges();
         }
 
         public bool Update(DataLayer.Customers entity)
         {
-            return Update(entity);
+            return base.Update(entity);
         }
     }
 }
