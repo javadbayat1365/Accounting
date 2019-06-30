@@ -39,7 +39,7 @@
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.txtFilter = new System.Windows.Forms.ToolStripTextBox();
             this.dgvcustomers = new System.Windows.Forms.DataGridView();
-            this.CustomerID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Mobile = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -75,6 +75,7 @@
             this.btnNewCustomer.Size = new System.Drawing.Size(70, 22);
             this.btnNewCustomer.Text = "شخص جدید";
             this.btnNewCustomer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnNewCustomer.Click += new System.EventHandler(this.btnNewCustomer_Click);
             // 
             // btnEditCustomer
             // 
@@ -91,6 +92,7 @@
             this.btnDeleteCustomer.Name = "btnDeleteCustomer";
             this.btnDeleteCustomer.Size = new System.Drawing.Size(72, 22);
             this.btnDeleteCustomer.Text = "حذف شخص";
+            this.btnDeleteCustomer.Click += new System.EventHandler(this.btnDeleteCustomer_Click);
             // 
             // btnRefreshCustomer
             // 
@@ -121,7 +123,7 @@
             this.dgvcustomers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvcustomers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvcustomers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.CustomerID,
+            this.ID,
             this.FullName,
             this.Mobile,
             this.Email});
@@ -132,27 +134,31 @@
             this.dgvcustomers.Size = new System.Drawing.Size(685, 381);
             this.dgvcustomers.TabIndex = 2;
             // 
-            // CustomerID
+            // ID
             // 
-            this.CustomerID.HeaderText = "Column1";
-            this.CustomerID.Name = "CustomerID";
-            this.CustomerID.ReadOnly = true;
-            this.CustomerID.Visible = false;
+            this.ID.DataPropertyName = "ID";
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Visible = false;
             // 
             // FullName
             // 
+            this.FullName.DataPropertyName = "FullName";
             this.FullName.HeaderText = "نام";
             this.FullName.Name = "FullName";
             this.FullName.ReadOnly = true;
             // 
             // Mobile
             // 
+            this.Mobile.DataPropertyName = "Mobile";
             this.Mobile.HeaderText = "موبایل";
             this.Mobile.Name = "Mobile";
             this.Mobile.ReadOnly = true;
             // 
             // Email
             // 
+            this.Email.DataPropertyName = "Email";
             this.Email.HeaderText = "ایمیل";
             this.Email.Name = "Email";
             this.Email.ReadOnly = true;
@@ -190,7 +196,7 @@
         private System.Windows.Forms.ToolStripTextBox txtFilter;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.DataGridView dgvcustomers;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CustomerID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn FullName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Mobile;
         private System.Windows.Forms.DataGridViewTextBoxColumn Email;

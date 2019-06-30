@@ -29,7 +29,6 @@ namespace Accounting
             using (UnitOfWork UOF = new UnitOfWork())
             {
                 dgvcustomers.DataSource = UOF.Customers.GetAll();
-
             }
         }
 
@@ -40,10 +39,38 @@ namespace Accounting
 
         private void txtFilter_TextChanged(object sender, EventArgs e)
         {
-            using (UnitOfWork uof = new UnitOfWork())
+            using (UnitOfWork UOF = new UnitOfWork())
             {
-                dgvcustomers.DataSource = uof.Customers.GetCustomersByFilter(txtFilter.Text.Trim());
+                dgvcustomers.DataSource = UOF.Customers.GetCustomersByFilter(txtFilter.Text.Trim());
             }
+        }
+
+        private void btnDeleteCustomer_Click(object sender, EventArgs e)
+        {
+            if (dgvcustomers.CurrentRow != null)
+            {
+                using (UnitOfWork UOW = new UnitOfWork())
+                {
+                    int customerid = int.Parse(dgvcustomers.CurrentRow.Cells[0].Value.ToString());
+                    UOW.Customers.DeleteByID(customerid);
+                    UOW.Save();
+                }
+                
+            }
+            else
+            {
+                MessageBox.Show("یک خط انتخاب کنید");
+            }
+        }
+
+        private void btnNewCustomer_Click(object sender, EventArgs e)
+        {
+            frm_AddCustomer frm_AddCustomer = new frm_AddCustomer();
+            if (frm_AddCustomer.ShowDialog() == DialogResult.OK)
+            {
+                DataBinding();
+            }
+            
         }
     }
 }

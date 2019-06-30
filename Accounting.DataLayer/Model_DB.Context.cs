@@ -22,7 +22,7 @@ namespace Accounting.DataLayer
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Customers>().ToTable("Customers");
+            throw new UnintentionalCodeFirstException();
         }
     
         public virtual DbSet<Customers> Customers { get; set; }

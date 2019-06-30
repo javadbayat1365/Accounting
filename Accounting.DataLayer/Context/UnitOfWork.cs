@@ -9,7 +9,7 @@ namespace Accounting.DataLayer.Context
 {
     public class UnitOfWork : IDisposable
     {
-        private Businness_DBEntities db;
+        private Businness_DBEntities db ;
         private ICustomers _ICustomers;
         public UnitOfWork()
         {
@@ -30,7 +30,10 @@ namespace Accounting.DataLayer.Context
             }
         }
 
-
+        public void Save()
+        {
+            db.SaveChanges();
+        }
 
         public void Dispose()
         {

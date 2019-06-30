@@ -44,11 +44,6 @@ namespace Accounting.DataLayer.Services
            return base.Insert(entity);
         }
 
-        public void SaveChanges()
-        {
-            base.SaveChanges();
-        }
-
         public bool Update(DataLayer.Customers entity)
         {
             return base.Update(entity);

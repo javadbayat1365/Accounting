@@ -23,7 +23,6 @@ namespace Accounting.DataLayer.Services
             {
                 
                 table.Remove(entity);
-                //db.Entry(table).State = System.Data.Entity.EntityState.Deleted;
                 return true;
             }
             catch (Exception w)
@@ -34,31 +33,57 @@ namespace Accounting.DataLayer.Services
 
         public bool DeleteByID(object ID)
         {
-            T entity = table.Find(ID);
-            table.Remove(entity);
-            return true;
+            try
+            {
+                T entity = table.Find(ID);
+                return Delete(entity);
+            }
+            catch (Exception w)
+            {
+                return false;
+            }
+            
         }
         public IEnumerable<T> GetAll()
         {
-           var sel = table.ToList();
-            return sel;
-
-
+            try
+            {
+                var sel = table.ToList();
+                return sel;
+            }
+            catch (Exception w)
+            {
+                return null;
+            }
+           
         }
 
         public T GetOneOfAll(object EntityID)
         {
-            throw new NotImplementedException();
+            try
+            {
+                T entity = table.Find(EntityID);
+                return entity;
+            }
+            catch (Exception w)
+            {
+                return null;
+            }
+            
         }
 
         public bool Insert(T entity)
         {
-            throw new NotImplementedException();
-        }
-
-        public void SaveChanges()
-        {
-            db.SaveChanges();
+            try
+            {
+                table.Add(entity);
+                return true;
+            }
+            catch (Exception w)
+            {
+                return false;
+            }
+            
         }
 
         public bool Update(T entity)

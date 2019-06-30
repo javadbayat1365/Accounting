@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Accounting.DataLayer.Repositories
 {
-    public interface IGenericRepository<T>
+
+    public interface IGenericRepository<T> where T : class
     {
         IEnumerable<T> GetAll();
         bool Delete(T entity);
@@ -14,6 +15,5 @@ namespace Accounting.DataLayer.Repositories
         bool Update(T entity);
         bool Insert(T entity);
         T GetOneOfAll(object EntityID);
-        void SaveChanges();
     }
 }
