@@ -13,6 +13,7 @@ namespace Accounting
 {
     public partial class frm_Customers : Form
     {
+       
         public frm_Customers()
         {
             InitializeComponent();
@@ -28,7 +29,7 @@ namespace Accounting
         {
             using (UnitOfWork UOF = new UnitOfWork())
             {
-                dgvcustomers.DataSource = UOF.Customers.GetAll();
+                dgvcustomers.DataSource = UOF.Customers.Get();
             }
         }
 
@@ -71,6 +72,24 @@ namespace Accounting
                 DataBinding();
             }
             
+        }
+
+        private void btnEditCustomer_Click(object sender, EventArgs e)
+        {
+            if (dgvcustomers.CurrentRow != null)
+            {
+                int customerid = int.Parse(dgvcustomers.CurrentRow.Cells[0].Value.ToString());
+                frm_AddCustomer frm_AddCustome = new frm_AddCustomer();
+                frm_AddCustome.CustomerID = customerid;
+                if(frm_AddCustome.ShowDialog() == DialogResult.OK)
+                {
+                    DataBinding();
+                }
+            }
+            else
+            {
+                MessageBox.Show("یک نفر رو انتخاب کن");
+            }
         }
     }
 }

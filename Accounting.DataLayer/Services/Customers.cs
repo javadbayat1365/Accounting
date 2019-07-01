@@ -1,4 +1,5 @@
 ﻿using Accounting.DataLayer.Repositories;
+using Accounting.Utilities.Convertor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Accounting.DataLayer.Services
 {
-    public class Customers : GenericRepository<Accounting.DataLayer.Customers>,ICustomers
+    public class Customers : GenericRepository<DataLayer.Customers>,ICustomers
     {
         private Businness_DBEntities db;
         public Customers(Businness_DBEntities DB):base(DB)
@@ -26,7 +27,13 @@ namespace Accounting.DataLayer.Services
 
         public new IEnumerable<DataLayer.Customers> GetAll()
         {
-            return base.GetAll();
+            var sel = base.Get();
+            foreach (var item in sel)
+            {
+
+               item.Mobile = item.Mobile.RialFormat() +" "+ DateTime.Now.ToShamsi();
+            }
+            return sel;
         }
 
         public IEnumerable<DataLayer.Customers> GetCustomersByFilter(string str)
@@ -36,7 +43,7 @@ namespace Accounting.DataLayer.Services
 
         public DataLayer.Customers GetOneOfAll(object EntityID)
         {
-           return base.GetOneOfAll(EntityID);
+           return base.GetById(EntityID);
         }
 
         public bool Insert(DataLayer.Customers entity)

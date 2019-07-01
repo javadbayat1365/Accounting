@@ -3,26 +3,30 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Accounting.DataLayer.Services
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : class
+    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
-        private Businness_DBEntities db;
-        private DbSet<T> table;
+        private Businness_DBEntities _db;
+        private DbSet<TEntity> _dbSet;
         public GenericRepository(Businness_DBEntities DB)
         {
-            db = DB;
-            table = db.Set<T>();
+            _db = DB;
+            _dbSet = _db.Set<TEntity>();
         }
-        public bool Delete(T entity)
+        public virtual bool Delete(TEntity entity)
         {
             try
             {
-                
-                table.Remove(entity);
+                if (_db.Entry(entity).State == EntityState.Detached)
+                {
+                    _dbSet.Attach(entity);
+                }
+                _dbSet.Remove(entity);
                 return true;
             }
             catch (Exception w)
@@ -31,11 +35,11 @@ namespace Accounting.DataLayer.Services
             }
         }
 
-        public bool DeleteByID(object ID)
+        public virtual bool DeleteByID(object ID)
         {
             try
             {
-                T entity = table.Find(ID);
+                TEntity entity = GetById(ID);
                 return Delete(entity);
             }
             catch (Exception w)
@@ -44,11 +48,12 @@ namespace Accounting.DataLayer.Services
             }
             
         }
-        public IEnumerable<T> GetAll()
+
+        public virtual IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> where = null)
         {
             try
             {
-                var sel = table.ToList();
+                var sel = _dbSet.Where(where);
                 return sel;
             }
             catch (Exception w)
@@ -58,11 +63,11 @@ namespace Accounting.DataLayer.Services
            
         }
 
-        public T GetOneOfAll(object EntityID)
+        public virtual TEntity GetById(object EntityID)
         {
             try
             {
-                T entity = table.Find(EntityID);
+                TEntity entity = _dbSet.Find(EntityID);
                 return entity;
             }
             catch (Exception w)
@@ -72,11 +77,11 @@ namespace Accounting.DataLayer.Services
             
         }
 
-        public bool Insert(T entity)
+        public virtual bool Insert(TEntity entity)
         {
             try
             {
-                table.Add(entity);
+                _dbSet.Add(entity);
                 return true;
             }
             catch (Exception w)
@@ -86,9 +91,11 @@ namespace Accounting.DataLayer.Services
             
         }
 
-        public bool Update(T entity)
+        public virtual bool Update(TEntity entity)
         {
-            throw new NotImplementedException();
+            _dbSet.Attach(entity);
+            _db.Entry(_dbSet).State = EntityState.Modified;
+            return true;
         }
     }
 }

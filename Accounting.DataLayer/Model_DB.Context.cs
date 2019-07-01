@@ -15,9 +15,11 @@ namespace Accounting.DataLayer
     
     public partial class Businness_DBEntities : DbContext
     {
+        
         public Businness_DBEntities()
             : base("name=Businness_DBEntities")
         {
+            
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

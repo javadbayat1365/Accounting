@@ -103,6 +103,11 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Accounting.Utilities\Accounting.Utilities.csproj">
+      <Project>{D160C23C-BA18-45B6-8281-DE2743897637}</Project>
+      <Name>Accounting.Utilities</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
