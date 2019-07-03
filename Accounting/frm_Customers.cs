@@ -1,5 +1,4 @@
-﻿using Accounting.DataLayer.Context;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -27,9 +26,9 @@ namespace Accounting
 
         private void DataBinding()
         {
-            using (UnitOfWork UOF = new UnitOfWork())
+            using (Business.Customers customers = new  Business.Customers())
             {
-                dgvcustomers.DataSource = UOF.Customers.Get();
+                dgvcustomers.DataSource = customers.Get();// customers.Get();
             }
         }
 
@@ -40,9 +39,9 @@ namespace Accounting
 
         private void txtFilter_TextChanged(object sender, EventArgs e)
         {
-            using (UnitOfWork UOF = new UnitOfWork())
+            using (Business.Customers customers = new Business.Customers())
             {
-                dgvcustomers.DataSource = UOF.Customers.GetCustomersByFilter(txtFilter.Text.Trim());
+                dgvcustomers.DataSource = customers.Get(w => w.FullName.Contains(txtFilter.Text.Trim()) || w.Address.Contains(txtFilter.Text.Trim()) || w.Email.Contains(txtFilter.Text.Trim()));
             }
         }
 
@@ -50,11 +49,11 @@ namespace Accounting
         {
             if (dgvcustomers.CurrentRow != null)
             {
-                using (UnitOfWork UOW = new UnitOfWork())
+                using (Business.Customers customers = new Business.Customers())
                 {
                     int customerid = int.Parse(dgvcustomers.CurrentRow.Cells[0].Value.ToString());
-                    UOW.Customers.DeleteByID(customerid);
-                    UOW.Save();
+                    customers.DeleteByID(customerid);
+                    customers.Save();
                 }
                 
             }

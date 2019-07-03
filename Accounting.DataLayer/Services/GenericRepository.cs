@@ -53,8 +53,12 @@ namespace Accounting.DataLayer.Services
         {
             try
             {
-                var sel = _dbSet.Where(where);
-                return sel;
+                IQueryable<TEntity> query = _dbSet;
+                if (where != null)
+                {
+                    query = query.Where(where);
+                }
+                return query.ToList();
             }
             catch (Exception w)
             {

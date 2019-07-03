@@ -1,8 +1,10 @@
 ﻿using Accounting.DataLayer.Repositories;
 using Accounting.Utilities.Convertor;
+using Accounting.ViewModels.Customers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,9 +27,9 @@ namespace Accounting.DataLayer.Services
             return base.DeleteByID(ID);
         }
 
-        public new IEnumerable<DataLayer.Customers> GetAll()
+        public new IEnumerable<DataLayer.Customers> Get(Expression<Func<DataLayer.Customers, bool>> where=null)
         {
-            var sel = base.Get();
+            var sel = base.Get(where);
             foreach (var item in sel)
             {
 
@@ -36,12 +38,19 @@ namespace Accounting.DataLayer.Services
             return sel;
         }
 
-        public IEnumerable<DataLayer.Customers> GetCustomersByFilter(string str)
+        public IEnumerable<ListCustomersViewModel> GetCustomersByFilter(string str)
         {
-            return db.Customers.Where(w => w.Email.Contains(str) || w.FullName.Contains(str) || w.Mobile.Contains(str)).ToList();
+            return db.Customers.Where(w => w.Email.Contains(str) || w.FullName.Contains(str) || w.Mobile.Contains(str)).Select(s => new ListCustomersViewModel()
+            {
+                FullName = s.FullName,
+                ID = s.ID,
+                Address = s.Address,
+                Mobile = s.Mobile
+
+            }).ToList();
         }
 
-        public DataLayer.Customers GetOneOfAll(object EntityID)
+        public DataLayer.Customers Get(object EntityID)
         {
            return base.GetById(EntityID);
         }

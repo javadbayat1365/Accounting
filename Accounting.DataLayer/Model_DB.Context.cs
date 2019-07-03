@@ -15,11 +15,9 @@ namespace Accounting.DataLayer
     
     public partial class Businness_DBEntities : DbContext
     {
-        
         public Businness_DBEntities()
             : base("name=Businness_DBEntities")
         {
-            
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -28,5 +26,7 @@ namespace Accounting.DataLayer
         }
     
         public virtual DbSet<Customers> Customers { get; set; }
+        public virtual DbSet<Accounting> Accounting { get; set; }
+        public virtual DbSet<AccountingType> AccountingType { get; set; }
     }
 }

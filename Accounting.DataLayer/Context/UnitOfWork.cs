@@ -1,4 +1,5 @@
 ﻿using Accounting.DataLayer.Repositories;
+using Accounting.DataLayer.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace Accounting.DataLayer.Context
     {
         private Businness_DBEntities db ;
         private ICustomers _ICustomers;
+        private IAccounting _IAccounting;
         public UnitOfWork()
         {
             if (db == null)
@@ -18,6 +20,8 @@ namespace Accounting.DataLayer.Context
                 db = new Businness_DBEntities();
             }
         }
+
+
         public ICustomers Customers
         {
             get
@@ -29,6 +33,16 @@ namespace Accounting.DataLayer.Context
                 return _ICustomers;
             }
         }
+        public IAccounting Accounting {
+            get {
+                if (_IAccounting == null)
+                {
+                    _IAccounting = new Services.Accounting(db);
+                }
+                return _IAccounting;
+            } }
+
+
 
         public void Save()
         {
@@ -37,6 +51,7 @@ namespace Accounting.DataLayer.Context
 
         public void Dispose()
         {
+            
             db.Dispose();
         }
     }

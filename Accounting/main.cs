@@ -27,20 +27,26 @@ namespace Accounting
 
         private void main_Load(object sender, EventArgs e)
         {
-            List<string> names = new List<string>();
-            names.Add("shokoofe");
-            names.Add("javad");
-            names.Add("ali");
-            names.Add("hamid");
-            var sel = (from n in names select n);
+            //List<string> names = new List<string>();
+            //names.Add("shokoofe");
+            //names.Add("javad");
+            //names.Add("ali");
+            //names.Add("hamid");
+            //var sel = (from n in names select n);
 
-            names.Add("jafar........");
+            //names.Add("jafar........");
 
-            string namess = "";
-            foreach (var item in sel)
-            {
-                namess += item;
-            }
+            //string namess = "";
+            //foreach (var item in sel)
+            //{
+            //    namess += item;
+            //}
+        }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            frmNewTransaction frmNewTransaction = new frmNewTransaction();
+            frmNewTransaction.ShowDialog();
         }
     }
 }

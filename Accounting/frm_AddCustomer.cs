@@ -1,5 +1,4 @@
-﻿using Accounting.DataLayer.Context;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -46,7 +45,7 @@ namespace Accounting
                     pc.Image.Save(Application.StartupPath + "/Images/" + locationName);
                 }
                 
-                using (UnitOfWork UOW = new UnitOfWork())
+                using (Business.Customers UOW = new Business.Customers())
                 {
                     DataLayer.Customers customer = new DataLayer.Customers()
                     {
@@ -60,11 +59,11 @@ namespace Accounting
                     if (CustomerID != 0)
                     {
                         customer.ID = CustomerID;
-                        UOW.Customers.Update(customer);
+                        UOW.Update(customer);
                     }
                     else
                     {
-                        UOW.Customers.Insert(customer);
+                        UOW.Insert(customer);
                     }
                     
                     UOW.Save();
@@ -78,9 +77,9 @@ namespace Accounting
             {
                 this.Text = "ویرایش";
                 btninsertdata.Text = "ویرایش";
-                using (UnitOfWork UOW = new UnitOfWork())
+                using (Business.Customers UOW = new  Business.Customers())
                 {
-                    var sel = UOW.Customers.GetById(CustomerID);
+                    var sel = UOW.Get(w => w.ID == CustomerID).FirstOrDefault();
                     txtAddress.Text = sel.Address;
                     txtEmail.Text = sel.Email;
                     txtMobile.Text = sel.Mobile;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Accounting.ViewModels.Customers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace Accounting.DataLayer.Repositories
 {
     public interface ICustomers : IGenericRepository<Customers>
     {
-        IEnumerable<Customers> GetCustomersByFilter(string str);
+        IEnumerable<ListCustomersViewModel> GetCustomersByFilter(string str);
     }
 }
