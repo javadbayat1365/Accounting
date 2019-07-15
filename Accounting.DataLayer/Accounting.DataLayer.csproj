@@ -37,10 +37,13 @@
     <Compile Include="AccountingType.cs">
       <DependentUpon>Model_DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Context\Context.cs" />
     <Compile Include="Context\UnitOfWork.cs" />
     <Compile Include="Customers.cs">
       <DependentUpon>Model_DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="DomainConfigs\BlogConfig.cs" />
+    <Compile Include="DomainConfigs\PostConfig.cs" />
     <Compile Include="Model_DB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -119,6 +122,12 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DomainClasses\DomainClasses.csproj">
+      <Project>{4705aead-27dd-449d-b685-9d818ab2fbc0}</Project>
+      <Name>DomainClasses</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

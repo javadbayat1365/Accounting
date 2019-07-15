@@ -69,6 +69,7 @@ namespace Accounting.DataLayer.Services
 
         public virtual TEntity GetById(object EntityID)
         {
+            
             try
             {
                 TEntity entity = _dbSet.Find(EntityID);

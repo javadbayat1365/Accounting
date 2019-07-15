@@ -1,4 +1,5 @@
 ﻿using Accounting.DataLayer.Repositories;
+using Accounting.ViewModels.Customers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,9 +36,13 @@ namespace Accounting.DataLayer.Services
             throw new NotImplementedException();
         }
 
-        public IEnumerable<DataLayer.Accounting> Get(Expression<Func<DataLayer.Accounting, bool>> where = null)
+        public IEnumerable<ListCustomersViewModel> Get(Expression<Func<DataLayer.Accounting, bool>> where = null)
         {
-            return base.Get(where);
+            return base.Get(where).Select(s => new ListCustomersViewModel() {
+                 Address = s.Description,
+                 FullName = s.CustomerId.ToString(),
+                 Mobile = s.DateTime.ToString()
+            });
         }
 
         public Accounting GetById(object EntityID)

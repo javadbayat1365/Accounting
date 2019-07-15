@@ -2,6 +2,7 @@
 using Accounting.DataLayer.Services;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,13 @@ namespace Accounting.DataLayer.Context
         {
             if (db == null)
             {
+                ////دیتابیس با هر تغییر در مودل به صورت اتوماتیک حذف و دوباره ساخته میشود
+                //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<Context>());
+                ////دیتابیس در مدل کد فرست با اجرای هر بار کانتکس یطور اتوماتیک حذف و ساخته می شود
+                //Database.SetInitializer(new DropCreateDatabaseAlways<Context>());
+                ////تنظیمات بالا برای حذف و دوباره ساخته شدن دیتابیس را غیر فعال میکند
+                //Database.SetInitializer<Context>(null);
+
                 db = new Businness_DBEntities();
             }
         }
